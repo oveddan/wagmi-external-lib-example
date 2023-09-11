@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
+import {CounterLib} from './CounterLib.sol';
+
 contract Counter {
     uint256 public number = 0;
     
@@ -11,6 +13,6 @@ contract Counter {
     }
 
     function increment() public {
-        number++;
+        number = CounterLib.increment(number);
     }
 }
