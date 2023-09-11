@@ -8,5 +8,7 @@ have its library addresses linked to the consuming contract.
 
 To demo failure:
 
+* make sure you have foundry installed
 * `yarn wagmi` to build the contracts and generate the abi and hooks
+* `anvil` to start anvil
 * `yarn test` to run the test in `./src/counter.test.ts`
