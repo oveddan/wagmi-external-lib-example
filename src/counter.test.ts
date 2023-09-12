@@ -26,12 +26,13 @@ const [
 ] = (await walletClient.getAddresses()) as [Address];
 
 const publicClient = createPublicClient({
+
   chain: foundry,
   transport: http(),
+
 });
 
 it("it can deploy the counter contract WITHOUT external libs", async () => {
-
   const hash = await walletClient.deployContract({
     abi: counterABI,
     account: deployerAccount,
@@ -44,7 +45,6 @@ it("it can deploy the counter contract WITHOUT external libs", async () => {
 });
 
 it("it can deploy the counter contract WITH external libs", async () => {
-
   const hash = await walletClient.deployContract({
     abi: counterUsingLibABI,
     account: deployerAccount,
