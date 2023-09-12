@@ -16,14 +16,17 @@ const walletClient = createWalletClient({
   transport: http(),
 });
 
+
 export const walletClientWithAccount = createWalletClient({
   chain: foundry,
   transport: http(),
 });
 
+
 const [
   deployerAccount,
 ] = (await walletClient.getAddresses()) as [Address];
+
 
 const publicClient = createPublicClient({
   chain: foundry,
