@@ -26,8 +26,10 @@ const [
 ] = (await walletClient.getAddresses()) as [Address];
 
 const publicClient = createPublicClient({
+
   chain: foundry,
   transport: http(),
+
 });
 
 it("it can deploy the counter contract WITHOUT external libs", async () => {
