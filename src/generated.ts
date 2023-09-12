@@ -101,6 +101,49 @@ export const counterLibABI = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CounterUsingLib
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const counterUsingLibABI = [
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [],
+    name: 'increment',
+    outputs: [],
+  },
+  {
+    stateMutability: 'view',
+    type: 'function',
+    inputs: [],
+    name: 'number',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+  },
+  {
+    stateMutability: 'nonpayable',
+    type: 'function',
+    inputs: [{ name: 'newNumber', internalType: 'uint256', type: 'uint256' }],
+    name: 'setNumber',
+    outputs: [],
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -420,4 +463,219 @@ export function useCounterLibIncrement<
     functionName: 'increment',
     ...config,
   } as UseContractReadConfig<typeof counterLibABI, TFunctionName, TSelectData>)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link counterUsingLibABI}__.
+ */
+export function useCounterUsingLibRead<
+  TFunctionName extends string,
+  TSelectData = ReadContractResult<typeof counterUsingLibABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<
+      typeof counterUsingLibABI,
+      TFunctionName,
+      TSelectData
+    >,
+    'abi'
+  > = {} as any,
+) {
+  return useContractRead({
+    abi: counterUsingLibABI,
+    ...config,
+  } as UseContractReadConfig<
+    typeof counterUsingLibABI,
+    TFunctionName,
+    TSelectData
+  >)
+}
+
+/**
+ * Wraps __{@link useContractRead}__ with `abi` set to __{@link counterUsingLibABI}__ and `functionName` set to `"number"`.
+ */
+export function useCounterUsingLibNumber<
+  TFunctionName extends 'number',
+  TSelectData = ReadContractResult<typeof counterUsingLibABI, TFunctionName>,
+>(
+  config: Omit<
+    UseContractReadConfig<
+      typeof counterUsingLibABI,
+      TFunctionName,
+      TSelectData
+    >,
+    'abi' | 'functionName'
+  > = {} as any,
+) {
+  return useContractRead({
+    abi: counterUsingLibABI,
+    functionName: 'number',
+    ...config,
+  } as UseContractReadConfig<
+    typeof counterUsingLibABI,
+    TFunctionName,
+    TSelectData
+  >)
+}
+
+/**
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link counterUsingLibABI}__.
+ */
+export function useCounterUsingLibWrite<
+  TFunctionName extends string,
+  TMode extends WriteContractMode = undefined,
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<
+          typeof counterUsingLibABI,
+          string
+        >['request']['abi'],
+        TFunctionName,
+        TMode
+      >
+    : UseContractWriteConfig<
+        typeof counterUsingLibABI,
+        TFunctionName,
+        TMode
+      > & {
+        abi?: never
+      } = {} as any,
+) {
+  return useContractWrite<typeof counterUsingLibABI, TFunctionName, TMode>({
+    abi: counterUsingLibABI,
+    ...config,
+  } as any)
+}
+
+/**
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link counterUsingLibABI}__ and `functionName` set to `"increment"`.
+ */
+export function useCounterUsingLibIncrement<
+  TMode extends WriteContractMode = undefined,
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<
+          typeof counterUsingLibABI,
+          'increment'
+        >['request']['abi'],
+        'increment',
+        TMode
+      > & { functionName?: 'increment' }
+    : UseContractWriteConfig<typeof counterUsingLibABI, 'increment', TMode> & {
+        abi?: never
+        functionName?: 'increment'
+      } = {} as any,
+) {
+  return useContractWrite<typeof counterUsingLibABI, 'increment', TMode>({
+    abi: counterUsingLibABI,
+    functionName: 'increment',
+    ...config,
+  } as any)
+}
+
+/**
+ * Wraps __{@link useContractWrite}__ with `abi` set to __{@link counterUsingLibABI}__ and `functionName` set to `"setNumber"`.
+ */
+export function useCounterUsingLibSetNumber<
+  TMode extends WriteContractMode = undefined,
+>(
+  config: TMode extends 'prepared'
+    ? UseContractWriteConfig<
+        PrepareWriteContractResult<
+          typeof counterUsingLibABI,
+          'setNumber'
+        >['request']['abi'],
+        'setNumber',
+        TMode
+      > & { functionName?: 'setNumber' }
+    : UseContractWriteConfig<typeof counterUsingLibABI, 'setNumber', TMode> & {
+        abi?: never
+        functionName?: 'setNumber'
+      } = {} as any,
+) {
+  return useContractWrite<typeof counterUsingLibABI, 'setNumber', TMode>({
+    abi: counterUsingLibABI,
+    functionName: 'setNumber',
+    ...config,
+  } as any)
+}
+
+/**
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link counterUsingLibABI}__.
+ */
+export function usePrepareCounterUsingLibWrite<TFunctionName extends string>(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof counterUsingLibABI, TFunctionName>,
+    'abi'
+  > = {} as any,
+) {
+  return usePrepareContractWrite({
+    abi: counterUsingLibABI,
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof counterUsingLibABI, TFunctionName>)
+}
+
+/**
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link counterUsingLibABI}__ and `functionName` set to `"increment"`.
+ */
+export function usePrepareCounterUsingLibIncrement(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof counterUsingLibABI, 'increment'>,
+    'abi' | 'functionName'
+  > = {} as any,
+) {
+  return usePrepareContractWrite({
+    abi: counterUsingLibABI,
+    functionName: 'increment',
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof counterUsingLibABI, 'increment'>)
+}
+
+/**
+ * Wraps __{@link usePrepareContractWrite}__ with `abi` set to __{@link counterUsingLibABI}__ and `functionName` set to `"setNumber"`.
+ */
+export function usePrepareCounterUsingLibSetNumber(
+  config: Omit<
+    UsePrepareContractWriteConfig<typeof counterUsingLibABI, 'setNumber'>,
+    'abi' | 'functionName'
+  > = {} as any,
+) {
+  return usePrepareContractWrite({
+    abi: counterUsingLibABI,
+    functionName: 'setNumber',
+    ...config,
+  } as UsePrepareContractWriteConfig<typeof counterUsingLibABI, 'setNumber'>)
+}
+
+/**
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link counterUsingLibABI}__.
+ */
+export function useCounterUsingLibEvent<TEventName extends string>(
+  config: Omit<
+    UseContractEventConfig<typeof counterUsingLibABI, TEventName>,
+    'abi'
+  > = {} as any,
+) {
+  return useContractEvent({
+    abi: counterUsingLibABI,
+    ...config,
+  } as UseContractEventConfig<typeof counterUsingLibABI, TEventName>)
+}
+
+/**
+ * Wraps __{@link useContractEvent}__ with `abi` set to __{@link counterUsingLibABI}__ and `eventName` set to `"Transfer"`.
+ */
+export function useCounterUsingLibTransferEvent(
+  config: Omit<
+    UseContractEventConfig<typeof counterUsingLibABI, 'Transfer'>,
+    'abi' | 'eventName'
+  > = {} as any,
+) {
+  return useContractEvent({
+    abi: counterUsingLibABI,
+    eventName: 'Transfer',
+    ...config,
+  } as UseContractEventConfig<typeof counterUsingLibABI, 'Transfer'>)
 }
